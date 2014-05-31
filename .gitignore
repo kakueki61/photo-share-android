@@ -1,0 +1,30 @@
+# generated files
+gen
+bin
+
+# IDE
+out
+.idea
+*.iml
+.project
+.classpath
+
+# gradle files
+gradle
+*.gradle
+
+# local configuration file
+local.properties
+
+
+# OSX
+.DS_Store
+*/.DS_Store
+*/**/.DS_Store
+
+# Windows
+Thumbs.db
+
+# Others
+docs
+apkfiles
