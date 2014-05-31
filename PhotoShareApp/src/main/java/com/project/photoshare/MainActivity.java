@@ -29,14 +29,22 @@ public class MainActivity extends FragmentActivity {
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
         ActionBar.Tab uploadTab = actionBar.newTab()
-                .setText("Upload")
+                .setText(R.string.tab_label_upload)
                 .setTabListener(new MainTabListener<UploadPageFragment>(this, "upload", UploadPageFragment.class));
         ActionBar.Tab dowloadTab = actionBar.newTab()
-                .setText("Download")
+                .setText(R.string.tab_label_download)
                 .setTabListener(new MainTabListener<DownloadPageFragment>(this, "download", DownloadPageFragment.class));
+        ActionBar.Tab historyTab = actionBar.newTab()
+                .setText(R.string.tab_label_history)
+                .setTabListener(new MainTabListener<HistoryPageFragment>(this, "history", HistoryPageFragment.class));
+        ActionBar.Tab mypageTab = actionBar.newTab()
+                .setText(R.string.tab_label_mypage)
+                .setTabListener(new MainTabListener<MyPageFragment>(this, "mypage", MyPageFragment.class));
 
         actionBar.addTab(uploadTab);
         actionBar.addTab(dowloadTab);
+        actionBar.addTab(historyTab);
+        actionBar.addTab(mypageTab);
     }
 
     @Override

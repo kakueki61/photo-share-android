@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * Tab Fragment for uploading images screen.
  *
- * @author <a href="mailto:">TakuyaKodama</a> (kodama-t)
+ * @author <a href="mailto:t.kodama61@gmail.com">TakuyaKodama</a> (kodama-t)
  * @version 1.00 14/04/06 kodama-t
  */
 public class UploadPageFragment extends Fragment {
@@ -29,7 +29,7 @@ public class UploadPageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.upload_fragment, container, false);
 
-        view.findViewById(R.id.button_upload).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.button_select_image).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Laevatein.from(getActivity()).choose(MimeType.of(MimeType.JPEG)).forResult(MainActivity.REQUEST_IMAGE_SELECTOR);

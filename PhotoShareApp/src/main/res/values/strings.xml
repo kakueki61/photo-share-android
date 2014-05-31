@@ -7,8 +7,13 @@
     <string name="title_section3">Section 3</string>
     <string name="action_settings">Settings</string>
 
-    <string name="button_upload">Upload</string>
-    <string name="button_fetch">Fetch</string>
+    <string name="tab_label_upload">送る</string>
+    <string name="tab_label_download">受け取る</string>
+    <string name="tab_label_history">履歴</string>
+    <string name="tab_label_mypage">マイページ</string>
+
+    <string name="button_select_image">写真を選ぶ</string>
+    <string name="button_fetch">写真を受け取る</string>
     <string name="button_upload_images">Images</string>
     <string name="button_fetch_images">Fetch Images</string>
 

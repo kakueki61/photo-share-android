@@ -7,12 +7,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="upload"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/button_select_image"
-        android:id="@+id/button_select_image"
-        android:layout_gravity="center_horizontal"/>
+        android:text="history"/>
 
 </LinearLayout>
