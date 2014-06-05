@@ -32,7 +32,11 @@ public class UploadPageFragment extends Fragment {
         view.findViewById(R.id.button_select_image).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Laevatein.from(getActivity()).choose(MimeType.of(MimeType.JPEG)).forResult(MainActivity.REQUEST_IMAGE_SELECTOR);
+                Laevatein.from(getActivity())
+                        .choose(MimeType.of(MimeType.JPEG))
+                        .count(0, 10)
+                        .capture(true)
+                        .forResult(MainActivity.REQUEST_IMAGE_SELECTOR);
             }
         });
 
