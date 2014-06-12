@@ -4,7 +4,6 @@ import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,15 +12,14 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.util.Log;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.android.volley.toolbox.Volley;
 import com.laevatein.Laevatein;
+import com.project.photoshare.api.ApiRequestService;
 import com.project.photoshare.utils.BitmapDecodeLoader;
 
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -94,6 +92,11 @@ public class MainActivity extends FragmentActivity implements LoaderManager.Load
             getSupportLoaderManager().restartLoader(0, bundle, MainActivity.this);
 
             // upload selected images
+            Fragment uploadFragment = getSupportFragmentManager().findFragmentByTag(TAG_FRAGMENT_UPLOAD);
+            EditText editText = (EditText) uploadFragment.getView().findViewById(R.id.edit_text);
+
+            ApiRequestService requestService = new ApiRequestService(getApplicationContext());
+            requestService.postImages(editText.getText().toString(), selected);
         }
     }
 
