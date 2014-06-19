@@ -7,6 +7,7 @@
     <uses-sdk
         android:minSdkVersion="9"
         android:targetSdkVersion="19" />
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -15,13 +16,29 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.project.photoshare.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".InputPassword"
+            android:label="@string/title_activity_input_password" >
+        </activity>
+        <activity
+            android:name=".PasswordConfirmation"
+            android:label="@string/title_activity_password_confirmation" >
+        </activity>
+        <activity
+            android:name=".SelectIsAddLater"
+            android:label="@string/title_activity_select_is_add_later" >
+        </activity>
+        <activity
+            android:name=".UploadCompleted"
+            android:label="@string/title_activity_upload_completed" >
         </activity>
     </application>
 

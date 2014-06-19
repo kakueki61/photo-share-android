@@ -30,7 +30,8 @@ public class ApiRequestService {
         mContext = context;
     }
 
-    public void postImages(String password, List<Uri> uriList) {
+    public void postImages(String password, List<Uri> uriList, boolean isAdd,
+                           Response.Listener listener, Response.ErrorListener errorListener) {
         String url = Constants.BASE_API_URL + "image/upload";
         Map<String, String> stringParams = new HashMap<String, String>();
         Map<String, InputStream> binaryParams = new HashMap<String, InputStream>();
@@ -46,20 +47,8 @@ public class ApiRequestService {
             }
         }
 
-        MultipartJsonRequest multipartJsonRequest = new MultipartJsonRequest(url, stringParams, binaryParams,
-            new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject response) {
-                    LogHelper.logJsonString(TAG, response);
-                }
-            },
-            new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Log.e(TAG, error.toString());
-                }
-            }
-        );
+        MultipartJsonRequest multipartJsonRequest
+                = new MultipartJsonRequest(url, stringParams, binaryParams, listener, errorListener);
 
         VolleyHelper.getRequestQueue(mContext).add(multipartJsonRequest);
     }

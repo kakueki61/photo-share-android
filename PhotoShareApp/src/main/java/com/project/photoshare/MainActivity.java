@@ -12,7 +12,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.util.Log;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -20,6 +19,7 @@ import com.laevatein.Laevatein;
 import com.project.photoshare.api.ApiRequestService;
 import com.project.photoshare.utils.BitmapDecodeLoader;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -86,6 +86,7 @@ public class MainActivity extends FragmentActivity implements LoaderManager.Load
                 Log.d(TAG, i + ": " + selected.get(i));
             }
 
+            /*
             // display selected image
             Bundle bundle = new Bundle();
             bundle.putParcelable("uri", selected.get(0));
@@ -97,6 +98,11 @@ public class MainActivity extends FragmentActivity implements LoaderManager.Load
 
             ApiRequestService requestService = new ApiRequestService(getApplicationContext());
             requestService.postImages(editText.getText().toString(), selected);
+            */
+
+            Intent intent = new Intent(getApplicationContext(), InputPassword.class);
+            intent.putExtra(SelectIsAddLater.TAG_INTENT_URI, (Serializable) selected);
+            startActivity(intent);
         }
     }
 
