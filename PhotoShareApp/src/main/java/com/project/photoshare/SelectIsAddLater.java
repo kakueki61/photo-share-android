@@ -2,31 +2,29 @@ package com.project.photoshare;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.project.photoshare.R;
 import com.project.photoshare.api.ApiRequestService;
-import com.project.photoshare.listener.PostImageErrorListener;
-import com.project.photoshare.listener.PostImageSuccessListener;
 import com.project.photoshare.utils.LogHelper;
-
 import org.json.JSONObject;
 
 import java.util.List;
 
-public class SelectIsAddLater extends ActionBarActivity implements Response.Listener<JSONObject>, Response.ErrorListener {
+public class SelectIsAddLater extends ActionBarActivity
+        implements Response.Listener<JSONObject>, Response.ErrorListener {
 
     public static final String TAG_INTENT_URI = "uri";
     public static final String TAG_INTENT_PASSWORD = "password";
 
     private static final String TAG = SelectIsAddLater.class.getName();
+
+    private ApiRequestService mRequestService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,23 +39,47 @@ public class SelectIsAddLater extends ActionBarActivity implements Response.List
             Log.d(TAG, i + ": " + uris.get(i));
         }
 
-        final ApiRequestService requestService = new ApiRequestService(getApplicationContext());
+        mRequestService = new ApiRequestService(getApplicationContext());
 
         findViewById(R.id.button_ok).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                requestService.postImages(password, uris, true,
-                        SelectIsAddLater.this, SelectIsAddLater.this);
+                postImages(password, uris, true);
             }
         });
 
         findViewById(R.id.button_no).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                requestService.postImages(password, uris, false,
-                        SelectIsAddLater.this, SelectIsAddLater.this);
+                postImages(password, uris, false);
             }
         });
+    }
+
+    private void postImages(final String password, final List<Uri> uris, final boolean isAdd) {
+
+        mRequestService.postImages(password, uris, isAdd,
+                SelectIsAddLater.this, SelectIsAddLater.this);
+        /*
+        getSupportLoaderManager().restartLoader(0, null, new LoaderManager.LoaderCallbacks<Map<Uri, Bitmap>>() {
+            @Override
+            public Loader<Map<Uri, Bitmap>> onCreateLoader(int id, Bundle args) {
+                BitmapDecodeLoader loader = new BitmapDecodeLoader(getApplicationContext(), uris);
+                loader.forceLoad();
+                return loader;
+            }
+
+            @Override
+            public void onLoadFinished(Loader<Map<Uri, Bitmap>> loader, Map<Uri, Bitmap> data) {
+                mRequestService.postImages(password, data, isAdd,
+                        SelectIsAddLater.this, SelectIsAddLater.this);
+            }
+
+            @Override
+            public void onLoaderReset(Loader<Map<Uri, Bitmap>> loader) {
+            }
+        });
+        */
     }
 
 

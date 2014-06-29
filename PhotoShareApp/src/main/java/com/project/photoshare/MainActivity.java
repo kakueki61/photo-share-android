@@ -14,13 +14,14 @@ import android.support.v4.content.Loader;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import com.laevatein.Laevatein;
-import com.project.photoshare.api.ApiRequestService;
 import com.project.photoshare.utils.BitmapDecodeLoader;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
+
+//import android.app.ActionBar;
 
 /**
  * Created with IntelliJ IDEA.
@@ -28,7 +29,7 @@ import java.util.List;
  * @author <a href="mailto:t.kodama61@gmail.com">TakuyaKodama</a> (kodama-t)
  * @version 1.00 14/04/03 kodama-t
  */
-public class MainActivity extends FragmentActivity implements LoaderManager.LoaderCallbacks<Bitmap> {
+public class MainActivity extends FragmentActivity implements LoaderManager.LoaderCallbacks<Map<Uri, Bitmap>> {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     public static final int REQUEST_IMAGE_SELECTOR = 1001;
@@ -107,7 +108,7 @@ public class MainActivity extends FragmentActivity implements LoaderManager.Load
     }
 
     @Override
-    public Loader<Bitmap> onCreateLoader(int id, Bundle args) {
+    public Loader<Map<Uri, Bitmap>> onCreateLoader(int id, Bundle args) {
         Log.d(TAG, "onCreateLoader");
         BitmapDecodeLoader bitmapDecodeLoader
                 = new BitmapDecodeLoader(getApplicationContext(), args.<Uri>getParcelable("uri"));
@@ -116,15 +117,15 @@ public class MainActivity extends FragmentActivity implements LoaderManager.Load
     }
 
     @Override
-    public void onLoadFinished(Loader<Bitmap> loader, Bitmap data) {
+    public void onLoadFinished(Loader<Map<Uri, Bitmap>> loader, Map<Uri, Bitmap> data) {
         Log.d(TAG, "onLoadFinished");
         Fragment uploadFragment = getSupportFragmentManager().findFragmentByTag(TAG_FRAGMENT_UPLOAD);
         ImageView imageView = (ImageView) uploadFragment.getView().findViewById(R.id.image_view);
-        imageView.setImageBitmap(data);
+        imageView.setImageBitmap(data.get(0));
     }
 
     @Override
-    public void onLoaderReset(Loader<Bitmap> loader) {
+    public void onLoaderReset(Loader<Map<Uri, Bitmap>> loader) {
         //TODO
     }
 

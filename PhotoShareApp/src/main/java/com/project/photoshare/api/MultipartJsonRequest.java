@@ -1,13 +1,14 @@
 package com.project.photoshare.api;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
-
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
 import com.android.volley.Response;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonRequest;
-
+import com.project.photoshare.utils.ImageUtils;
 import org.apache.http.Consts;
 import org.apache.http.HttpEntity;
 import org.apache.http.entity.ContentType;
@@ -63,7 +64,9 @@ public class MultipartJsonRequest extends JsonRequest<JSONObject> {
             } else if (entry.getValue() instanceof InputStream) {
                 Log.d(TAG, "entry.getValue() => InputStream");
                 Log.d(TAG, "key: " + entry.getKey());
-                mMultipartEntityBuilder.addBinaryBody("uploadFiles[]", (InputStream) entry.getValue(), imageContentType, entry.getKey());
+                Bitmap bitmap = BitmapFactory.decodeStream( (InputStream) entry.getValue() );
+                byte[] bitmapByteArray = ImageUtils.getResizedByteArray(bitmap);
+                mMultipartEntityBuilder.addBinaryBody("uploadFiles[]", bitmapByteArray, imageContentType, entry.getKey());
             }
         }
     }
